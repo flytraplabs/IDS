@@ -15,4 +15,6 @@ wget https://raw.github.com/flytraplabs/IDS/master/indexer.conf -O /opt/logstash
 sed -i 's/DEFAULT_PASSWORD/$PASSWORD/g' /opt/logstash/indexer.conf
 sudo wget https://raw.github.com/flytraplabs/IDS/master/logstash-init.sh -O /etc/init.d/logstash-init.sh
 chmod +x /etc/init.d/logstash-init.sh
+mkdir -p /var/lock/subsys
+update-rc.d logstash-init.sh defaults
 initctl reload-configuration

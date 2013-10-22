@@ -10,9 +10,9 @@ sed -i '/bind 127.0.0.1/d' /etc/redis/redis.conf
 echo "masterauth $PASSWORD" >> /etc/redis/redis.conf
 /etc/init.d/redis-server restart
 sudo mkdir -p /opt/logstash
-wget https://download.elasticsearch.org/logstash/logstash/logstash-1.2.1-flatjar.jar -o /opt/logstash/logstash.jar
-wget https://raw.github.com/flytraplabs/IDS/master/indexer.conf -o /opt/logstash/index.conf
+wget https://download.elasticsearch.org/logstash/logstash/logstash-1.2.1-flatjar.jar -O /opt/logstash/logstash.jar
+wget https://raw.github.com/flytraplabs/IDS/master/indexer.conf -O /opt/logstash/indexer.conf
 sed -i 's/DEFAULT_PASSWORD/$PASSWORD/g' /opt/logstash/indexer.conf
-sudo wget https://raw.github.com/flytraplabs/IDS/master/logstash-init.sh -o /etc/init.d/logstash-init.sh
+sudo wget https://raw.github.com/flytraplabs/IDS/master/logstash-init.sh -O /etc/init.d/logstash-init.sh
 chmod +x /etc/init.d/logstash-init.sh
 initctl reload-configuration

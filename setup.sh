@@ -52,7 +52,7 @@ function debian_server_install
 	wget https://download.elasticsearch.org/elasticsearch/elasticsearch/elasticsearch-0.90.5.deb
 	dpkg -i elasticsearch-0.90.5.deb
 	service elasticsearch start
-	sed -i 's/# network.bind_host: 192.168.0.1/network.bind_host 0.0.0.0/g' /usr/local/elasticsearch/config/elasticsearch.yml
+	sed -i 's/# network.bind_host: 192.168.0.1/network.bind_host 0.0.0.0/g' /etc/elasticsearch/elasticsearch.yml
 	/etc/init.d/elasticsearch restart
 	sed -i '/bind 127.0.0.1/d' /etc/redis/redis.conf
 	echo "requirepass $PASSWORD" >> /etc/redis/redis.conf

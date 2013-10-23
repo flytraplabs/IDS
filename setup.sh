@@ -1,37 +1,37 @@
 #!/usr/bin/env bash
-#                                                                  
-#                                          ZI                                    
-#                                         7$I                                    
-#                                        $7OI                                    
-#                                        $7MI                                    
-#                                        $$DZ                                    
-#                                        $$D                                     
-#                                        M$I                                     
-#                                        M8                                      
-#                                ??$ $$  $$                                      
-#                              D+O$77O$ $$$M              MN MM M                
-#                               ++D$77M$$$$$             MZ7+++$7+N              
-#                    D M        +I$N$7Z$$$$$            8????+++++$ON            
-#                 $+Z$D$?7    7$?++N$$M7$$$Z           ?II777II???++NM           
-#               +??++N$$77I    MI?+Z8$OM7$$          MN77$$$$$$$777IIN           
-#             M?8III??++$77I   $Z8MMO  MI7$           7$$$$$$$$$$$$$$7           
-#             Z77$$$7I?++877O  DM7I ++ M?I7      D??I7$$$$$$$$$$$$$$7            
-#          D  D$$$$$$$I?++8D    $$7 ?+ M??        ++    ZZMM$$   $7M             
-#      M?N$$$     $N$$MI??      O$$ I?MD++  MM MMMN      Z$M N      M M          
-#    M?$$D$$$$$$M$DI777   ??++   Z$$7I?7+  ++???N7?    $$$       M7I?++D7M       
-#   N+7$M$$$$$MZ8I77$$$N    $II  $$$M77?+ M??I7777N$MD$$    D   O$$7I??++$O      
-#   +I7Z$$$$$$ $I77$$$$$$$O   O$  M$ $$OIZI77$$$$$$M$$$   $$$$Z$N$$$$7I?++$N     
-#   8MO7$$$$M  ZI77Z    $$N$$M M$ $$ $$O$ON$$$$$  $M$$ $$$NNO    $$$$$7I+++8     
-#  MZII7$$$N  M$I77       IINZ$  $M$$$$M$$ZM$$N   $$$$$$$$Z$$$   N$$$$7I+++M$    
-#   MN$7$$$              M77ZO$$  $M$M$$$$ $D$   $$O$$$$8M$$$O    $$$$7I?++$$    
-#   MNO$$$8               D77$$$$$ O$M$D$ M$$Z  M$$$O $  $M        $$$7I?++NZ    
-#      M$8                 Z$$$NNMMNNNNNN $M$   $$$ O$  $$           $7MIM+$M    
-#                MNNNNNNNNNNM$NNNNNNNNNNNMNNNNNNNNNNNNMMMM              ??       
-#       MMMMMMNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN$NNNNNNNNM                 
-#                            MNNNNNNNNNNNNNMMMM         MMMMMM MMMMMMNNNM                                                                        
+#
+#                                          ZI
+#                                         7$I
+#                                        $7OI
+#                                        $7MI
+#                                        $$DZ
+#                                        $$D
+#                                        M$I
+#                                        M8
+#                                ??$ $$  $$
+#                              D+O$77O$ $$$M              MN MM M
+#                               ++D$77M$$$$$             MZ7+++$7+N
+#                    D M        +I$N$7Z$$$$$            8????+++++$ON
+#                 $+Z$D$?7    7$?++N$$M7$$$Z           ?II777II???++NM
+#               +??++N$$77I    MI?+Z8$OM7$$          MN77$$$$$$$777IIN
+#             M?8III??++$77I   $Z8MMO  MI7$           7$$$$$$$$$$$$$$7
+#             Z77$$$7I?++877O  DM7I ++ M?I7      D??I7$$$$$$$$$$$$$$7
+#          D  D$$$$$$$I?++8D    $$7 ?+ M??        ++    ZZMM$$   $7M
+#      M?N$$$     $N$$MI??      O$$ I?MD++  MM MMMN      Z$M N      M M
+#    M?$$D$$$$$$M$DI777   ??++   Z$$7I?7+  ++???N7?    $$$       M7I?++D7M
+#   N+7$M$$$$$MZ8I77$$$N    $II  $$$M77?+ M??I7777N$MD$$    D   O$$7I??++$O
+#   +I7Z$$$$$$ $I77$$$$$$$O   O$  M$ $$OIZI77$$$$$$M$$$   $$$$Z$N$$$$7I?++$N
+#   8MO7$$$$M  ZI77Z    $$N$$M M$ $$ $$O$ON$$$$$  $M$$ $$$NNO    $$$$$7I+++8
+#  MZII7$$$N  M$I77       IINZ$  $M$$$$M$$ZM$$N   $$$$$$$$Z$$$   N$$$$7I+++M$
+#   MN$7$$$              M77ZO$$  $M$M$$$$ $D$   $$O$$$$8M$$$O    $$$$7I?++$$
+#   MNO$$$8               D77$$$$$ O$M$D$ M$$Z  M$$$O $  $M        $$$7I?++NZ
+#      M$8                 Z$$$NNMMNNNNNN $M$   $$$ O$  $$           $7MIM+$M
+#                MNNNNNNNNNNM$NNNNNNNNNNNMNNNNNNNNNNNNMMMM              ??
+#       MMMMMMNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN$NNNNNNNNM
+#                            MNNNNNNNNNNNNNMMMM         MMMMMM MMMMMMNNNM
 #
 # flytrap labs 2013
-# IDS deployment script 
+# IDS deployment script
 #
 
 
@@ -43,7 +43,7 @@ function usage
 }
 
 
-function debian_server_install	
+function debian_server_install
 {
 	echo "$COL_GREEN Enter a password for your redis instance. This will be the same password you will use in your shipper.conf. $COL_RESET"
 	read -s -p "Password: " password
@@ -52,7 +52,8 @@ function debian_server_install
 	wget https://download.elasticsearch.org/elasticsearch/elasticsearch/elasticsearch-0.90.5.deb
 	dpkg -i elasticsearch-0.90.5.deb
 	service elasticsearch start
-	sed -i 's/# network.bind_host: 192.168.0.1/network.bind_host 0.0.0.0/g'
+	sed -i 's/# network.bind_host: 192.168.0.1/network.bind_host 0.0.0.0/g' /usr/local/elasticsearch/config/elasticsearch.yml
+	/etc/init.d/elasticsearch restart
 	sed -i '/bind 127.0.0.1/d' /etc/redis/redis.conf
 	echo "requirepass $PASSWORD" >> /etc/redis/redis.conf
 	/etc/init.d/redis-server restart
@@ -79,13 +80,18 @@ function debian_server_install
 
 function install_server
 {
-	if [ $1 = "Debian" ]; then
+
+	echo $1
+
+	if [ "$1" == "Debian" ]; then
 		debian_server_install
-	elif [ $1 = "Red Hat" ]; then
+	elif [ "$1" == "Ubuntu" ]; then
 		debian_server_install
-	elif [ $1 = "Fedora" ]; then
+	elif [ "$1" == "Red Hat" ]; then
 		debian_server_install
-	elif [ $1 = "CentOS" ]; then
+	elif [ "$1" == "Fedora" ]; then
+		debian_server_install
+	elif [ "$1" == "CentOS" ]; then
 		debian_server_install
 	fi
 }
@@ -117,12 +123,12 @@ else
 	exit
 fi
 
-#parse cargs
-install_type=
+#parse args
+INSTALL_TYPE=""
 while [ "$1" != "" ]; do
     case $1 in
         -i | --install )           shift
-                                install_type=$1
+                                INSTALL_TYPE=$1
                                 ;;
         * )                     usage
                                 exit 1
@@ -130,8 +136,11 @@ while [ "$1" != "" ]; do
     shift
 done
 
-if [ install_type = "server" ]; then
-	install_server DISTRO
-elif [ install_type = "sensor" ]; then
-	install_server DISTRO
+if [ "$INSTALL_TYPE" = "" ]; then
+	usage
+	exit
+elif [ "$INSTALL_TYPE" = "server" ]; then
+	install_server $DISTRO
+elif [ "$INSTALL_TYPE" = "sensor" ]; then
+	install_server $DISTRO
 fi

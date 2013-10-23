@@ -81,8 +81,6 @@ function debian_server_install
 function install_server
 {
 
-	echo $1
-
 	if [ "$1" == "Debian" ]; then
 		debian_server_install
 	elif [ "$1" == "Ubuntu" ]; then

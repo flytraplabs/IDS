@@ -7,7 +7,7 @@ wget https://download.elasticsearch.org/elasticsearch/elasticsearch/elasticsearc
 sudo dpkg -i elasticsearch-0.90.5.deb
 sudo service elasticsearch start
 sed -i '/bind 127.0.0.1/d' /etc/redis/redis.conf
-echo "masterauth $PASSWORD" >> /etc/redis/redis.conf
+echo "requirepass $PASSWORD" >> /etc/redis/redis.conf
 /etc/init.d/redis-server restart
 sudo mkdir -p /opt/logstash
 wget https://download.elasticsearch.org/logstash/logstash/logstash-1.2.1-flatjar.jar -O /opt/logstash/logstash.jar

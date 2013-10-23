@@ -45,7 +45,7 @@ function usage
 
 function debian_server_install
 {
-	echo "$COL_GREEN Enter a password for your redis instance. This will be the same password you will use in your shipper.conf. $COL_RESET"
+	echo "Enter a password for your redis instance. This will be the same password you will use in your shipper.conf."
 	read -s -p "Password: " password
 
 	apt-get install default-jdk git redis-server apache2
@@ -96,16 +96,6 @@ function install_server
 	fi
 }
 
-# Colors
-ESC_SEQ="\x1b["
-COL_RESET=$ESC_SEQ"39;49;00m"
-COL_RED=$ESC_SEQ"31;01m"
-COL_GREEN=$ESC_SEQ"32;01m"
-COL_YELLOW=$ESC_SEQ"33;01m"
-COL_BLUE=$ESC_SEQ"34;01m"
-COL_MAGENTA=$ESC_SEQ"35;01m"
-COL_CYAN=$ESC_SEQ"36;01m"
-
 # OS detection
 if [ -f /etc/lsb-release ]; then
     . /etc/lsb-release
@@ -119,7 +109,7 @@ elif [-f /etc/fedora-release ]; then
 elif [ -f /etc/centos-release ]; then
 	DISTRO="CentOS"
 else
-	echo "$COL_RED [!] $COL_RESET distro not supported"
+	echo "[!] distro not supported"
 	exit
 fi
 

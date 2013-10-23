@@ -46,7 +46,7 @@ function usage
 function debian_server_install
 {
 	echo "Enter a password for your redis instance. This will be the same password you will use in your shipper.conf."
-	read -s -p "Password: " password
+	read -s -p "Password: " PASSWORD
 
 	apt-get install default-jdk git redis-server apache2
 	wget https://download.elasticsearch.org/elasticsearch/elasticsearch/elasticsearch-0.90.5.deb

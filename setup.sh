@@ -73,21 +73,24 @@ function debian_server_install
 	apache2ctl restart
 }
 
-function install_server
+function debian_sensor_install()
 {
-
-	if [ "$1" == "Debian" ]; then
-		debian_server_install
-	elif [ "$1" == "Ubuntu" ]; then
-		debian_server_install
-	elif [ "$1" == "Red Hat" ]; then
-		debian_server_install
-	elif [ "$1" == "Fedora" ]; then
-		debian_server_install
-	elif [ "$1" == "CentOS" ]; then
-		debian_server_install
-	fi
+	apt-get install snort libcrypt-ssleay-perl
+	rm /etc/snort/rules/*.rules
+	wget https://pulledpork.googlecode.com/files/pulledpork-0.7.0.tar.gz
+	tar -z -xf pulledpork-0.7.0.tar.gz
+	cd pulledpork-0.7.0/
+	cp pulledpork.pl /usr/bin
+	chmod +x /usr/bin/pulledpork.pl
+	mkdir /etc/pulledpork
+	cd etc
+	mv * /etc/pulledpork
+	wget https://raw.github.com/flytraplabs/IDS/master/debian_pulledpork.conf -O /etc/pulledpork/pulledpork.conf
+	wget https://raw.github.com/flytraplabs/IDS/master/debian_snort.conf -O /etc/snort/snort.conf
+	pulledpork.pl -c /etc/pulledpork/pulledpork.conf
+	/etc/init.d/snort restart
 }
+
 
 # OS detection
 if [ -f /etc/lsb-release ]; then
@@ -95,12 +98,6 @@ if [ -f /etc/lsb-release ]; then
     DISTRO=$DISTRIB_ID
 elif [ -f /etc/debian_version ]; then
     DISTRO="Debian"
-elif [ -f /etc/redhat-release ]; then
-    DISTRO="Red Hat"
-elif [-f /etc/fedora-release ]; then
-	DISTRO="Fedora"
-elif [ -f /etc/centos-release ]; then
-	DISTRO="CentOS"
 else
 	echo "[!] distro not supported"
 	exit
@@ -123,7 +120,7 @@ if [ "$2" = "" ]; then
 	usage
 	exit
 elif [ "$2" = "server" ]; then
-	install_server $DISTRO
+	debian_server_install $DISTRO
 elif [ "$2" = "sensor" ]; then
-	install_server $DISTRO
+	debian_sensor_install $DISTRO
 fi

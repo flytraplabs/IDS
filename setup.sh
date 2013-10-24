@@ -33,10 +33,6 @@
 # flytrap labs 2013
 # IDS deployment script
 #
-
-
-
-
 function usage
 {
     echo "usage: ./setup.sh --install [server | sensor]"
@@ -52,7 +48,6 @@ function debian_server_install
 	wget https://download.elasticsearch.org/elasticsearch/elasticsearch/elasticsearch-0.90.5.deb
 	dpkg -i elasticsearch-0.90.5.deb
 	service elasticsearch start
-	sed -i 's/# network.bind_host: 192.168.0.1/network.bind_host 0.0.0.0/g' /etc/elasticsearch/elasticsearch.yml
 	/etc/init.d/elasticsearch restart
 	sed -i '/bind 127.0.0.1/d' /etc/redis/redis.conf
 	echo "requirepass $PASSWORD" >> /etc/redis/redis.conf
@@ -113,22 +108,22 @@ fi
 
 #parse args
 INSTALL_TYPE=""
-while [ "$1" != "" ]; do
-    case $1 in
-        -i | --install )           shift
-                                INSTALL_TYPE=$1
-                                ;;
-        * )                     usage
-                                exit 1
-    esac
-    shift
-done
 
-if [ "$INSTALL_TYPE" = "" ]; then
+if [ "$1" != "--install"]; then
+	usage
+	exit 1
+fi
+
+if [ "$2" = ""]; then
+	usage
+	exit 1
+fi
+
+if [ "$2" = "" ]; then
 	usage
 	exit
-elif [ "$INSTALL_TYPE" = "server" ]; then
+elif [ "$2" = "server" ]; then
 	install_server $DISTRO
-elif [ "$INSTALL_TYPE" = "sensor" ]; then
+elif [ "$2" = "sensor" ]; then
 	install_server $DISTRO
 fi
